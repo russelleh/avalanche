@@ -19,7 +19,9 @@ var render_number = function(number, index, element) {
 };
 
 var parse_number = function(element) {
-  return parseInt(element.innerHTML.replace(/ /g, ''), 10)
+  var number = parseInt(element.innerHTML.replace(/ /g, ''), 10)
+  element.innerHTML = '';
+  return number;
 }
 
 document.addEventListener('DOMContentLoaded', function() {
@@ -38,17 +40,14 @@ document.addEventListener('DOMContentLoaded', function() {
 
     if (index >= card_number.length) {
       if (input.innerHTML) {
-        summation        = parse_number(input);
-        input.innerHTML  = '';
-        stream.innerHTML = stream.innerHTML.trim();
-        stream.innerHTML += summation.toString();
+        summation = parse_number(input);
+        render_number(card_number + summation.toString(), 0, stream);
       }
     } else {
       if (input.innerHTML) {
         summation =  parse_number(input);
         summation += parseInt(card_number[index], 10);
 
-        input.innerHTML  = '';
         render_number(summation, index, output);
       } else {
         summation = parse_number(output);
@@ -56,7 +55,6 @@ document.addEventListener('DOMContentLoaded', function() {
           summation %= 10;
           render_number(summation, index, output);
         } else {
-          output.innerHTML = '';
           index += 1;
           render_number(summation, index, input);
         }
