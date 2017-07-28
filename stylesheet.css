@@ -1,0 +1,28 @@
+body {
+  margin:      4em;
+
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+code {
+  font-family: Source Code Pro, monospace;
+  display:     block;
+  white-space: pre;
+  line-height: 1em;
+  min-height:  1em;
+}
+
+#card {
+  display: inline-block;
+  padding: 3em 1em 2em 1em;
+
+  border:        0.125em solid black;
+  border-radius: 0.5em;
+}
+
+#input, #output {
+  color: grey;
+}
