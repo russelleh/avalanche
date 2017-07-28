@@ -18,6 +18,10 @@ var render_number = function(number, index, element) {
   element.innerHTML = number.join('');
 };
 
+var parse_number = function(element) {
+  return parseInt(element.innerHTML.replace(/ /g, ''), 10)
+}
+
 document.addEventListener('DOMContentLoaded', function() {
   var card_number = generate_number();
   var index = 0;
@@ -34,20 +38,20 @@ document.addEventListener('DOMContentLoaded', function() {
 
     if (index >= card_number.length) {
       if (input.innerHTML) {
-        summation        = parseInt(input.innerHTML, 10);
+        summation        = parse_number(input);
         input.innerHTML  = '';
         stream.innerHTML = stream.innerHTML.trim();
         stream.innerHTML += summation.toString();
       }
     } else {
       if (input.innerHTML) {
-        summation =  parseInt(input.innerHTML.replace(/ /g, ''), 10);
+        summation =  parse_number(input);
         summation += parseInt(card_number[index], 10);
 
         input.innerHTML  = '';
         render_number(summation, index, output);
       } else {
-        summation = parseInt(output.innerHTML.replace(/ /g, ''), 10);
+        summation = parse_number(output);
         if (summation >= 10) {
           summation %= 10;
           render_number(summation, index, output);
