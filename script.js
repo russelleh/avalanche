@@ -7,7 +7,6 @@ var generate_number = function() {
 }
 
 var render_number = function(number) {
-  number.splice(18, 0, ' ');
   number.splice(12, 0, ' ');
   number.splice(8, 0, ' ');
   number.splice(4, 0, ' ');
