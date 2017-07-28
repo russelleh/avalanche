@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', function() {
+var generate_number = function() {
   var card_number = [];
   while (card_number.length < 15) {
     card_number.push(Math.floor(Math.random() * 10));
@@ -7,7 +7,11 @@ document.addEventListener('DOMContentLoaded', function() {
   card_number.splice(12, 0, ' ');
   card_number.splice(8, 0, ' ');
   card_number.splice(4, 0, ' ');
-  card_number = card_number.join('');
+  return card_number.join('');
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+  var card_number = generate_number();
   document.getElementById('stream').innerHTML = card_number;
 
   var index = 0;
@@ -45,7 +49,6 @@ document.addEventListener('DOMContentLoaded', function() {
           while (stream.innerHTML[index] === ' ' && index < 17) {
             index += 1;
           }
-          console.log(index);
           input.innerHTML = ' '.repeat(index) + summation.toString();
         }
       }
