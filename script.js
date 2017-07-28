@@ -3,13 +3,14 @@ var generate_number = function() {
   while (card_number.length < 15) {
     card_number.push(Math.floor(Math.random() * 10));
   }
-  return card_number
+  return card_number.join('');
 }
 
 var render_number = function(number) {
+  number = number.split('');
   number.splice(12, 0, ' ');
-  number.splice(8, 0, ' ');
-  number.splice(4, 0, ' ');
+  number.splice(8,  0, ' ');
+  number.splice(4,  0, ' ');
   return number.join('');
 }
 
