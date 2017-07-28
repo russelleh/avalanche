@@ -4,21 +4,25 @@ var generate_number = function() {
     card_number.push(Math.floor(Math.random() * 10));
   }
   return card_number.join('');
-}
+};
 
-var render_number = function(number) {
-  number = number.split('');
+var pad_number = function(number, index) {
+  return ' '.repeat(index) + number;
+};
+
+var render_number = function(number, index, element) {
+  number = pad_number(number, index).split('');
   number.splice(12, 0, ' ');
   number.splice(8,  0, ' ');
   number.splice(4,  0, ' ');
-  return number.join('');
-}
+  element.innerHTML = number.join('');
+};
 
 document.addEventListener('DOMContentLoaded', function() {
   var card_number = generate_number();
   var index = 0;
 
-  document.getElementById('stream').innerHTML = render_number(card_number);
+  render_number(card_number, 0, document.getElementById('stream'));
 
   document.addEventListener('click', function(e) {
     document.getElementById('click').hidden = true;
@@ -28,7 +32,7 @@ document.addEventListener('DOMContentLoaded', function() {
     var output = document.getElementById('output');
     var summation = 0;
 
-    if (index === 18) {
+    if (index >= card_number.length) {
       if (input.innerHTML) {
         summation        = parseInt(input.innerHTML, 10);
         input.innerHTML  = '';
@@ -37,23 +41,20 @@ document.addEventListener('DOMContentLoaded', function() {
       }
     } else {
       if (input.innerHTML) {
-        summation =  parseInt(input.innerHTML, 10);
-        summation += parseInt(stream.innerHTML[index], 10);
+        summation =  parseInt(input.innerHTML.replace(/ /g, ''), 10);
+        summation += parseInt(card_number[index], 10);
 
         input.innerHTML  = '';
-        output.innerHTML = ' '.repeat(index) + summation.toString();
+        render_number(summation, index, output);
       } else {
-        summation = parseInt(output.innerHTML, 10);
+        summation = parseInt(output.innerHTML.replace(/ /g, ''), 10);
         if (summation >= 10) {
           summation %= 10;
-          output.innerHTML = ' '.repeat(index) + summation.toString();
+          render_number(summation, index, output);
         } else {
           output.innerHTML = '';
           index += 1;
-          while (stream.innerHTML[index] === ' ' && index < 17) {
-            index += 1;
-          }
-          input.innerHTML = ' '.repeat(index) + summation.toString();
+          render_number(summation, index, input);
         }
       }
     }
