@@ -13,6 +13,8 @@ document.addEventListener('DOMContentLoaded', function() {
   var index = 0;
 
   document.addEventListener('click', function(e) {
+    document.getElementById('click').hidden = true;
+
     var input  = document.getElementById('input');
     var stream = document.getElementById('stream');
     var output = document.getElementById('output');
