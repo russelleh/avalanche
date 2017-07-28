@@ -3,18 +3,22 @@ var generate_number = function() {
   while (card_number.length < 15) {
     card_number.push(Math.floor(Math.random() * 10));
   }
-  card_number.splice(18, 0, ' ');
-  card_number.splice(12, 0, ' ');
-  card_number.splice(8, 0, ' ');
-  card_number.splice(4, 0, ' ');
-  return card_number.join('');
+  return card_number
+}
+
+var render_number = function(number) {
+  number.splice(18, 0, ' ');
+  number.splice(12, 0, ' ');
+  number.splice(8, 0, ' ');
+  number.splice(4, 0, ' ');
+  return number.join('');
 }
 
 document.addEventListener('DOMContentLoaded', function() {
   var card_number = generate_number();
-  document.getElementById('stream').innerHTML = card_number;
-
   var index = 0;
+
+  document.getElementById('stream').innerHTML = render_number(card_number);
 
   document.addEventListener('click', function(e) {
     document.getElementById('click').hidden = true;
