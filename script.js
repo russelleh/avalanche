@@ -38,10 +38,16 @@ document.addEventListener('DOMContentLoaded', function() {
     var output = document.getElementById('output');
     var summation = 0;
 
-    if (index >= card_number.length) {
+    if (index === card_number.length) {
       if (input.innerHTML) {
         summation = parse_number(input);
-        render_number(card_number + summation.toString(), 0, stream);
+        stream.innerHTML += "<span style='color:green;'>" + summation.toString() + "</span>";
+      } else {
+        card_number = generate_number();
+        index       = 0;
+        summation   = 0;
+        render_number(card_number, index, stream);
+        render_number(0,           index, input);
       }
     } else {
       if (input.innerHTML) {
