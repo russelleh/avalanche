@@ -8,6 +8,10 @@ body {
   user-select: none;
 }
 
+#content {
+  text-align: center;
+}
+
 code {
   display:     block;
   font-family: inherit;
@@ -22,6 +26,8 @@ code {
 
   border:        0.125em solid black;
   border-radius: 0.5em;
+
+  text-align: left;
 }
 
 #input, #output {
